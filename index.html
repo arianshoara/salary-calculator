@@ -4,197 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>محاسبه حقوق</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700&display=swap');
-
-        :root {
-            --primary-color: #4CAF50;
-            --secondary-color: #8BC34A;
-            --background-color: #F8F9FA;
-            --card-background: #FFFFFF;
-            --text-color: #333333;
-            --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            --border-radius: 12px;
-        }
-
-        body {
-            font-family: 'Vazirmatn', sans-serif;
-            background-color: var(--background-color);
-            color: var(--text-color);
-            min-height: 100vh;
-            margin: 0;
-            padding: 20px;
-            box-sizing: border-box;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-start;
-            align-items: center;
-        }
-
-        .header {
-            width: 100%;
-            max-width: 1000px;
-            display: flex;
-            justify-content: flex-start;
-            padding-bottom: 20px;
-        }
-
-        .laws-link {
-            text-decoration: none;
-            font-weight: bold;
-            color: var(--primary-color);
-            transition: color 0.3s ease;
-            font-size: 1rem;
-        }
-
-        .laws-link:hover {
-            color: var(--secondary-color);
-        }
-
-        .main-container {
-            display: flex;
-            flex-direction: row;
-            gap: 20px;
-            width: 100%;
-            max-width: 1000px;
-            flex-wrap: wrap;
-        }
-
-        .calculator-container {
-            flex: 1;
-            min-width: 300px;
-            background-color: var(--card-background);
-            padding: 40px;
-            border-radius: var(--border-radius);
-            box-shadow: var(--box-shadow);
-            text-align: center;
-        }
-
-        .info-container {
-            flex: 1;
-            min-width: 300px;
-            background-color: var(--card-background);
-            padding: 40px;
-            border-radius: var(--border-radius);
-            box-shadow: var(--box-shadow);
-            text-align: right;
-        }
-
-        h1 {
-            color: var(--primary-color);
-            margin-bottom: 30px;
-            font-size: 2rem;
-            font-weight: 700;
-        }
-
-        h2 {
-            color: var(--primary-color);
-            margin-bottom: 20px;
-            font-size: 1.5rem;
-            font-weight: 700;
-        }
-
-        .input-group {
-            margin-bottom: 25px;
-            text-align: right;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 8px;
-            font-size: 1rem;
-            font-weight: 700;
-            color: var(--text-color);
-        }
-
-        input[type="number"] {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            font-size: 1.1rem;
-            box-sizing: border-box;
-            text-align: left;
-            direction: ltr;
-        }
-
-        input[type="number"]:focus {
-            outline: none;
-            border-color: var(--primary-color);
-            box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.2);
-        }
-
-        button {
-            width: 100%;
-            padding: 15px;
-            background-color: var(--primary-color);
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-size: 1.2rem;
-            font-weight: 700;
-            cursor: pointer;
-            transition: background-color 0.3s ease, transform 0.2s ease;
-        }
-
-        button:hover {
-            background-color: var(--secondary-color);
-            transform: translateY(-2px);
-        }
-
-        #results {
-            margin-top: 30px;
-            text-align: right;
-        }
-
-        #results div {
-            padding: 15px;
-            margin-bottom: 15px;
-            border-radius: 8px;
-            font-size: 1.1rem;
-            line-height: 1.5;
-            background-color: var(--background-color);
-            border-right: 4px solid var(--primary-color);
-        }
-
-        #results span {
-            font-weight: 700;
-            color: var(--primary-color);
-        }
-
-        .info-container ul {
-            list-style-type: disc;
-            padding-right: 20px;
-            margin-bottom: 20px;
-        }
-
-        .info-container li {
-            margin-bottom: 10px;
-            font-size: 1rem;
-            line-height: 1.6;
-        }
-
-        .footer {
-            margin-top: 20px;
-            text-align: center;
-            font-size: 0.9rem;
-            color: #666;
-            width: 100%;
-        }
-
-        @media (max-width: 768px) {
-            .main-container {
-                flex-direction: column;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    
     <div class="header">
         <a href="laws.html" class="laws-link">قوانین و حقوق کارگر</a>
     </div>
-
     <div class="main-container">
         <div class="calculator-container">
             <h1>حسابگر حقوق</h1>
@@ -218,58 +33,39 @@
             </ul>
         </div>
     </div>
-    
     <div class="footer">
         سایت توسط آرین شعرا ساخته شده است.
     </div>
-
     <script>
         function calculateAndDisplaySalary() {
             const hoursInput = document.getElementById('hours-input');
             const resultsDiv = document.getElementById('results');
             const hoursWorked = parseFloat(hoursInput.value);
-
             if (isNaN(hoursWorked) || hoursWorked < 0) {
                 resultsDiv.innerHTML = '<div style="color: #D32F2F;">لطفا یک عدد معتبر برای ساعات کاری وارد کنید.</div>';
                 return;
             }
-            
-            // ثوابت
             const hourlyRate = 47200;
             const fullBenefits = 2200000;
             const fullHousing = 900000;
             const insuranceRate = 0.07;
             const standardHours = 220;
-
-            // محاسبه حقوق پایه
             const baseSalary = hoursWorked * hourlyRate;
-            
-            // محاسبه مزایا به صورت پروراتا
             const prorateRatio = hoursWorked / standardHours;
             const benefits = fullBenefits * prorateRatio;
             const housing = fullHousing * prorateRatio;
-            
-            // حقوق ناخالص
             const grossSalary = baseSalary + benefits + housing;
-            
-            // کسر بیمه
             const insurance = grossSalary * insuranceRate;
-            
-            // حقوق خالص
             const netSalary = grossSalary - insurance;
-
             const formattedGrossSalary = new Intl.NumberFormat('fa-IR').format(Math.round(grossSalary));
             const formattedNetSalary = new Intl.NumberFormat('fa-IR').format(Math.round(netSalary));
-
             resultsDiv.innerHTML = `
                 <div>
-                    <strong>حقوق ناخالص:</strong>
-                    <br>
+                    <strong>حقوق ناخالص:</strong><br>
                     <span>${formattedGrossSalary} تومان</span>
                 </div>
                 <div>
-                    <strong>حقوق خالص:</strong>
-                    <br>
+                    <strong>حقوق خالص:</strong><br>
                     <span>${formattedNetSalary} تومان</span>
                 </div>
             `;
