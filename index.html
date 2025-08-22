@@ -13,10 +13,28 @@
     <div class="main-container">
         <div class="calculator-container">
             <h1>حسابگر حقوق</h1>
-            <p>لطفا تعداد ساعت کارکرد ماهانه خود را وارد کنید تا حقوق خالص و ناخالص شما محاسبه شود.</p>
+            <p>لطفا اطلاعات زیر را وارد کنید تا حقوق خالص و ناخالص شما محاسبه شود.</p>
             <div class="input-group">
                 <label for="hours-input">ساعت کارکرد ماهانه:</label>
                 <input type="number" id="hours-input" placeholder="مثال: 180" min="0">
+            </div>
+            <div class="input-group">
+                <label for="marital-status">وضعیت تأهل:</label>
+                <select id="marital-status">
+                    <option value="single">مجرد</option>
+                    <option value="married">متأهل</option>
+                </select>
+            </div>
+            <div class="input-group">
+                <label for="children-count">تعداد فرزندان (۰ تا ۵):</label>
+                <select id="children-count">
+                    <option value="0">۰</option>
+                    <option value="1">۱</option>
+                    <option value="2">۲</option>
+                    <option value="3">۳</option>
+                    <option value="4">۴</option>
+                    <option value="5">۵</option>
+                </select>
             </div>
             <button onclick="calculateAndDisplaySalary()">محاسبه</button>
             <div id="results"></div>
@@ -29,8 +47,45 @@
                 <li>حقوق ساعتی: ۴۷,۲۰۰ تومان، که با ضرب تعداد ساعات کاری در این مبلغ، حقوق پایه محاسبه می‌شود.</li>
                 <li>بن خواروبار: ۲,۲۰۰,۰۰۰ تومان (برای ۲۲۰ ساعت)، به صورت پروراتا (نسبت به ساعات کاری) پرداخت می‌شود.</li>
                 <li>حق مسکن: ۹۰۰,۰۰۰ تومان (برای ۲۲۰ ساعت)، به صورت پروراتا (نسبت به ساعات کاری) پرداخت می‌شود.</li>
-                <li>بیمه: ۷٪ از حقوق ناخالص (حقوق پایه + بن + مسکن) کسر می‌شود و به سازمان تأمین اجتماعی پرداخت می‌گردد.</li>
+                <li>حق عائله‌مندی: ۵,۰۰۰,۰۰۰ تومان (برای کارگر متأهل، ۲۲۰ ساعت)، به صورت پروراتا.</li>
+                <li>حق اولاد: ۱,۵۰۰,۰۰۰ تومان به ازای هر فرزند (تا سقف ۳ فرزند، ۲۲۰ ساعت)، به صورت پروراتا.</li>
+                <li>بیمه: ۷٪ از حقوق ناخالص (حقوق پایه + بن + مسکن + عائله‌مندی + حق اولاد) کسر می‌شود.</li>
             </ul>
+        </div>
+    </div>
+    <div class="laws-container">
+        <h2>مواد قانونی مرتبط از قانون کار</h2>
+        <div class="law-item">
+            <strong>ماده ۳۴:</strong><br>
+            کلیه دریافت‌های قانونی که کارگر به اعتبار قرارداد کار اعم از مزد یا حقوق، کمک عایله‌مندی، هزینه‌های مسکن، خواربار، ایاب و ذهاب، مزایای غیرنقدی، پاداش افزایش تولید، سود سالانه و نظایر آنها دریافت می‌نماید را حق‌السعی می‌نامند.
+        </div>
+        <div class="law-item">
+            <strong>ماده ۳۵:</strong><br>
+            مزد عبارت است از وجوه نقدی یا غیرنقدی و یا مجموع آنها که در مقابل کار به کارگر پرداخت می‌شود.
+        </div>
+        <div class="law-item">
+            <strong>ماده ۳۷:</strong><br>
+            مزد باید در فواصل زمانی مرتب و در روز غیرتعطیل و ضمن ساعات کار به وجه نقد رایج کشور یا با تراضی طرفین به وسیله چک عهده بانک با رعایت شرایط ذیل پرداخت شود: الف - چنانچه بر اساس عرف کارگاه، محل یا حرفه موردنظر، مزد بصورت روزانه تعیین شده باشد، پرداخت آن باید پس از پایان روز انجام شود. ب - در صورتی که بر اساس عرف یا قرارداد، مزد بصورت هفتگی تعیین شده باشد، پرداخت مزد باید پس از پایان هفته انجام شود. ج - در مورد کارگری که بر اساس قرارداد، مزد وی بصورت ماهانه پرداخت می‌شود، پرداخت مزد ماهیانه کارگر حداکثر تا آخرین روز ماه انجام گیرد.
+        </div>
+        <div class="law-item">
+            <strong>ماده ۳۹:</strong><br>
+            مزد و مزایای کارگرانی که به صورت نیمه وقت و یا کمتر از ساعات قانونی تعیین شده به کار اشتغال دارند به نسبت ساعات کار انجام یافته محاسبه و پرداخت می‌شود.
+        </div>
+        <div class="law-item">
+            <strong>ماده ۴۱:</strong><br>
+            شورای عالی کار همه ساله موظف است، میزان حداقل مزد کارگران را برای نقاط مختلف کشور و یا صنایع مختلف با توجه به معیارهای ذیل تعیین نماید: ۱- حداقل مزد کارگران با توجه به درصد تورمی که از طرف بانک مرکزی جمهوری اسلامی ایران اعلام می‌شود. ۲- حداقل مزد بدون آن که مشخصات جسمی و روحی کارگران و ویژگی‌های کار محول شده را مورد توجه قرار دهد باید به اندازه‌ای باشد تا زندگی یک خانواده، که تعداد متوسط آن توسط مراجع رسمی اعلام می‌شود را تامین نماید.
+        </div>
+        <div class="law-item">
+            <strong>ماده ۵۱:</strong><br>
+            ساعات کار در این قانون مدت زمانی است که کارگر نیرو یا وقت خود را به منظور انجام کار در اختیار کارفرما قرار می‌دهد. به غیر از مواردی که در این قانون مستثنی شده است ساعات کار کارگران در شبانه روز نباید از ۸ ساعت تجاوز نماید. تبصره - ساعات کار کارگران در هفته ۴۴ ساعت می‌باشد مگر در مواردی که قانون معین کرده باشد.
+        </div>
+        <div class="law-item">
+            <strong>ماده ۵۹:</strong><br>
+            در شرایط عادی ارجاع کار اضافی به کارگر با شرایط ذیل مجاز است: الف- موافقت کارگر. ب- پرداخت ۴۰% اضافه بر مزد هر ساعت کار عادی.
+        </div>
+        <div class="law-item">
+            <strong>ماده ۱۴۸:</strong><br>
+            کارفرمایان کارگاه‌های مشمول این قانون مکلف هستند نسبت به بیمه کردن کارگران واحد خود طبق قانون تامین اجتماعی اقدام نمایند.
         </div>
     </div>
     <div class="footer">
@@ -39,6 +94,8 @@
     <script>
         function calculateAndDisplaySalary() {
             const hoursInput = document.getElementById('hours-input');
+            const maritalStatus = document.getElementById('marital-status').value;
+            const childrenCount = parseInt(document.getElementById('children-count').value);
             const resultsDiv = document.getElementById('results');
             const hoursWorked = parseFloat(hoursInput.value);
             if (isNaN(hoursWorked) || hoursWorked < 0) {
@@ -48,13 +105,19 @@
             const hourlyRate = 47200;
             const fullBenefits = 2200000;
             const fullHousing = 900000;
+            const fullFamilyAllowance = 5000000;
+            const childAllowance = 1500000;
+            const maxChildren = 3;
             const insuranceRate = 0.07;
             const standardHours = 220;
             const baseSalary = hoursWorked * hourlyRate;
             const prorateRatio = hoursWorked / standardHours;
             const benefits = fullBenefits * prorateRatio;
             const housing = fullHousing * prorateRatio;
-            const grossSalary = baseSalary + benefits + housing;
+            const familyAllowance = maritalStatus === 'married' ? fullFamilyAllowance * prorateRatio : 0;
+            const effectiveChildren = Math.min(childrenCount, maxChildren);
+            const childrenTotalAllowance = effectiveChildren * childAllowance * prorateRatio;
+            const grossSalary = baseSalary + benefits + housing + familyAllowance + childrenTotalAllowance;
             const insurance = grossSalary * insuranceRate;
             const netSalary = grossSalary - insurance;
             const formattedGrossSalary = new Intl.NumberFormat('fa-IR').format(Math.round(grossSalary));
