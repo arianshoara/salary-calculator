@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>محاسبه حقوق</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700&display=swap');
+
+        :root {
+            --primary-color: #4CAF50;
+            --secondary-color: #8BC34A;
+            --background-color: #F8F9FA;
+            --card-background: #FFFFFF;
+            --text-color: #333333;
+            --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --border-radius: 12px;
+        }
+
+        body {
+            font-family: 'Vazirmatn', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 500px;
+            background-color: var(--card-background);
+            padding: 40px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            text-align: center;
+        }
+
+        h1 {
+            color: var(--primary-color);
+            margin-bottom: 30px;
+            font-size: 2rem;
+            font-weight: 700;
+        }
+
+        .input-group {
+            margin-bottom: 25px;
+            text-align: right;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text-color);
+        }
+
+        input[type="number"] {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            box-sizing: border-box;
+            text-align: left;
+            direction: ltr;
+        }
+
+        input[type="number"]:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.2);
+        }
+
+        button {
+            width: 100%;
+            padding: 15px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        button:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-2px);
+        }
+
+        #results {
+            margin-top: 30px;
+            text-align: right;
+        }
+
+        #results div {
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            line-height: 1.5;
+            background-color: var(--background-color);
+            border-right: 4px solid var(--primary-color);
+        }
+
+        #results span {
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>حسابگر حقوق</h1>
+        <p>لطفا تعداد ساعت کارکرد ماهانه خود را وارد کنید تا حقوق خالص و ناخالص شما محاسبه شود.</p>
+
+        <div class="input-group">
+            <label for="hours-input">ساعت کارکرد ماهانه:</label>
+            <input type="number" id="hours-input" placeholder="مثال: 180" min="0">
+        </div>
+
+        <button onclick="calculateAndDisplaySalary()">محاسبه</button>
+
+        <div id="results">
+            </div>
+    </div>
+
+    <script>
+        function calculateAndDisplaySalary() {
+            const hoursInput = document.getElementById('hours-input');
+            const resultsDiv = document.getElementById('results');
+            const hoursWorked = parseFloat(hoursInput.value);
+
+            if (isNaN(hoursWorked) || hoursWorked < 0) {
+                resultsDiv.innerHTML = '<div style="color: #D32F2F;">لطفا یک عدد معتبر برای ساعات کاری وارد کنید.</div>';
+                return;
+            }
+            
+            // ثوابت
+            const hourlyRate = 47200; // حقوق ساعتی به تومان
+            const fullBenefits = 2200000; // بن خواروبار کامل (ماهانه)
+            const fullHousing = 900000; // حق مسکن کامل (ماهانه)
+            const insuranceRate = 0.07; // نرخ بیمه (۷٪)
+            const standardHours = 220; // ساعات کاری استاندارد ماهانه
+
+            // محاسبه حقوق پایه
+            const baseSalary = hoursWorked * hourlyRate;
+            
+            // محاسبه مزایا به صورت پروراتا
+            const prorateRatio = hoursWorked / standardHours;
+            const benefits = fullBenefits * prorateRatio;
+            const housing = fullHousing * prorateRatio;
+            
+            // حقوق ناخالص
+            const grossSalary = baseSalary + benefits + housing;
+            
+            // کسر بیمه
+            const insurance = grossSalary * insuranceRate;
+            
+            // حقوق خالص
+            const netSalary = grossSalary - insurance;
+
+            const formattedGrossSalary = new Intl.NumberFormat('fa-IR').format(Math.round(grossSalary));
+            const formattedNetSalary = new Intl.NumberFormat('fa-IR').format(Math.round(netSalary));
+
+            resultsDiv.innerHTML = `
+                <div>
+                    <strong>حقوق ناخالص:</strong>
+                    <br>
+                    <span>${formattedGrossSalary} تومان</span>
+                </div>
+                <div>
+                    <strong>حقوق خالص:</strong>
+                    <br>
+                    <span>${formattedNetSalary} تومان</span>
+                </div>
+            `;
+        }
+    </script>
+
+</body>
+</html>
