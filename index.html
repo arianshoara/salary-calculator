@@ -21,18 +21,27 @@
             font-family: 'Vazirmatn', sans-serif;
             background-color: var(--background-color);
             color: var(--text-color);
-            display: flex;
-            justify-content: center;
-            align-items: center;
             min-height: 100vh;
             margin: 0;
             padding: 20px;
             box-sizing: border-box;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
         }
 
-        .container {
+        .main-container {
+            display: flex;
+            flex-direction: row;
+            gap: 20px;
             width: 100%;
-            max-width: 500px;
+            max-width: 1000px;
+            flex-wrap: wrap;
+        }
+
+        .calculator-container {
+            flex: 1;
+            min-width: 300px;
             background-color: var(--card-background);
             padding: 40px;
             border-radius: var(--border-radius);
@@ -40,10 +49,27 @@
             text-align: center;
         }
 
+        .info-container {
+            flex: 1;
+            min-width: 300px;
+            background-color: var(--card-background);
+            padding: 40px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            text-align: right;
+        }
+
         h1 {
             color: var(--primary-color);
             margin-bottom: 30px;
             font-size: 2rem;
+            font-weight: 700;
+        }
+
+        h2 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            font-size: 1.5rem;
             font-weight: 700;
         }
 
@@ -115,23 +141,48 @@
             color: var(--primary-color);
         }
 
+        .info-container ul {
+            list-style-type: disc;
+            padding-right: 20px;
+            margin-bottom: 20px;
+        }
+
+        .info-container li {
+            margin-bottom: 10px;
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 768px) {
+            .main-container {
+                flex-direction: column;
+            }
+        }
     </style>
 </head>
 <body>
-
-    <div class="container">
-        <h1>حسابگر حقوق</h1>
-        <p>لطفا تعداد ساعت کارکرد ماهانه خود را وارد کنید تا حقوق خالص و ناخالص شما محاسبه شود.</p>
-
-        <div class="input-group">
-            <label for="hours-input">ساعت کارکرد ماهانه:</label>
-            <input type="number" id="hours-input" placeholder="مثال: 180" min="0">
-        </div>
-
-        <button onclick="calculateAndDisplaySalary()">محاسبه</button>
-
-        <div id="results">
+    <div class="main-container">
+        <div class="calculator-container">
+            <h1>حسابگر حقوق</h1>
+            <p>لطفا تعداد ساعت کارکرد ماهانه خود را وارد کنید تا حقوق خالص و ناخالص شما محاسبه شود.</p>
+            <div class="input-group">
+                <label for="hours-input">ساعت کارکرد ماهانه:</label>
+                <input type="number" id="hours-input" placeholder="مثال: 180" min="0">
             </div>
+            <button onclick="calculateAndDisplaySalary()">محاسبه</button>
+            <div id="results"></div>
+        </div>
+        <div class="info-container">
+            <h2>توضیحات محاسبه حقوق</h2>
+            <ul>
+                <li>حقوق ماهانه: بر اساس حداقل دستمزد مصوب سال ۱۴۰۴، حقوق ماهانه کامل (۲۲۰ ساعت) برابر با ۱۰,۳۹۰,۹۶۸ تومان است.</li>
+                <li>حقوق روزانه: معادل ۳۴۶,۳۶۶ تومان (تقسیم حقوق ماهانه بر ۳۰ روز).</li>
+                <li>حقوق ساعتی: ۴۷,۲۰۰ تومان، که با ضرب تعداد ساعات کاری در این مبلغ، حقوق پایه محاسبه می‌شود.</li>
+                <li>بن خواروبار: ۲,۲۰۰,۰۰۰ تومان (برای ۲۲۰ ساعت)، به صورت پروراتا (نسبت به ساعات کاری) پرداخت می‌شود.</li>
+                <li>حق مسکن: ۹۰۰,۰۰۰ تومان (برای ۲۲۰ ساعت)، به صورت پروراتا (نسبت به ساعات کاری) پرداخت می‌شود.</li>
+                <li>بیمه: ۷٪ از حقوق ناخالص (حقوق پایه + بن + مسکن) کسر می‌شود و به سازمان تأمین اجتماعی پرداخت می‌گردد.</li>
+            </ul>
+        </div>
     </div>
 
     <script>
@@ -146,11 +197,11 @@
             }
             
             // ثوابت
-            const hourlyRate = 47200; // حقوق ساعتی به تومان
-            const fullBenefits = 2200000; // بن خواروبار کامل (ماهانه)
-            const fullHousing = 900000; // حق مسکن کامل (ماهانه)
-            const insuranceRate = 0.07; // نرخ بیمه (۷٪)
-            const standardHours = 220; // ساعات کاری استاندارد ماهانه
+            const hourlyRate = 47200;
+            const fullBenefits = 2200000;
+            const fullHousing = 900000;
+            const insuranceRate = 0.07;
+            const standardHours = 220;
 
             // محاسبه حقوق پایه
             const baseSalary = hoursWorked * hourlyRate;
@@ -186,6 +237,5 @@
             `;
         }
     </script>
-
 </body>
 </html>
