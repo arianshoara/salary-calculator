@@ -1,49 +1,134 @@
-@import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700&display=swap');
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;700&display=swap');
 
+/* Root Variables for Light and Dark Themes */
 :root {
-    --primary-color: #4CAF50;
-    --secondary-color: #8BC34A;
-    --background-color: #F8F9FA;
-    --card-background: #FFFFFF;
-    --text-color: #333333;
-    --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --primary-color: #4CAF50; /* Green for primary elements */
+    --secondary-color: #8BC34A; /* Lighter green for hover */
+    --accent-color: #FF9800; /* Orange for warnings or highlights */
+    --background-color: #F8F9FA; /* Light gray background */
+    --card-background: #FFFFFF; /* White for cards */
+    --text-color: #333333; /* Dark gray for text */
+    --error-color: #D32F2F; /* Red for errors */
+    --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
     --border-radius: 12px;
+    --transition: all 0.3s ease;
+    --font-family: 'Vazirmatn', sans-serif;
+
+    /* Dark Mode Variables */
+    --background-color-dark: #1A1A1A; /* Dark gray background */
+    --card-background-dark: #2C2C2C; /* Darker gray for cards */
+    --text-color-dark: #E0E0E0; /* Light text for dark mode */
+    --border-color-dark: #444444; /* Border color for dark mode */
+}
+
+/* Dark Mode Styles */
+body.dark-mode {
+    background-color: var(--background-color-dark);
+    color: var(--text-color-dark);
+}
+
+body.dark-mode .calculator-container,
+body.dark-mode .info-container,
+body.dark-mode .laws-container,
+body.dark-mode .container {
+    background-color: var(--card-background-dark);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+body.dark-mode .laws-link,
+body.dark-mode #results span,
+body.dark-mode h1,
+body.dark-mode h2 {
+    color: var(--secondary-color);
+}
+
+body.dark-mode input[type="number"],
+body.dark-mode select {
+    background-color: var(--card-background-dark);
+    border-color: var(--border-color-dark);
+    color: var(--text-color-dark);
+}
+
+body.dark-mode .error-message {
+    background-color: rgba(211, 47, 47, 0.2);
+}
+
+body.dark-mode #results div,
+body.dark-mode .law-item {
+    background-color: var(--background-color-dark);
+    border-right-color: var(--secondary-color);
+}
+
+body.dark-mode .footer {
+    color: #A0A0A0;
+}
+
+/* Global Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 body {
-    font-family: 'Vazirmatn', sans-serif;
+    font-family: var(--font-family);
     background-color: var(--background-color);
     color: var(--text-color);
     min-height: 100vh;
-    margin: 0;
     padding: 20px;
-    box-sizing: border-box;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
     align-items: center;
+    line-height: 1.6;
+    transition: var(--transition);
 }
 
+/* Header Styles */
 .header {
     width: 100%;
     max-width: 1000px;
+    padding: 15px 0;
     display: flex;
-    justify-content: flex-start;
-    padding-bottom: 20px;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .laws-link {
     text-decoration: none;
-    font-weight: bold;
+    font-weight: 500;
     color: var(--primary-color);
-    transition: color 0.3s ease;
-    font-size: 1rem;
+    font-size: 1.1rem;
+    padding: 8px 16px;
+    border-radius: 8px;
+    transition: var(--transition);
 }
 
-.laws-link:hover {
-    color: var(--secondary-color);
+.laws-link:hover,
+.laws-link:focus {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: var(--card-background);
 }
 
+/* Theme Toggle Button */
+.theme-toggle {
+    background: none;
+    border: none;
+    font-size: 1.1rem;
+    color: var(--primary-color);
+    cursor: pointer;
+    padding: 8px 16px;
+    border-radius: 8px;
+    transition: var(--transition);
+}
+
+.theme-toggle:hover,
+.theme-toggle:focus {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: var(--card-background);
+}
+
+/* Main Container */
 .main-container {
     display: flex;
     flex-direction: row;
@@ -53,109 +138,156 @@ body {
     flex-wrap: wrap;
 }
 
+/* Calculator, Info, Laws, and General Containers */
+.calculator-container,
+.info-container,
+.laws-container,
+.container {
+    background-color: var(--card-background);
+    padding: 30px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    width: 100%;
+    max-width: 1000px;
+    transition: var(--transition);
+}
+
 .calculator-container {
     flex: 1;
     min-width: 300px;
-    background-color: var(--card-background);
-    padding: 40px;
-    border-radius: var(--border-radius);
-    box-shadow: var(--box-shadow);
     text-align: center;
 }
 
-.info-container {
+.info-container,
+.laws-container,
+.container {
     flex: 1;
     min-width: 300px;
-    background-color: var(--card-background);
-    padding: 40px;
-    border-radius: var(--border-radius);
-    box-shadow: var(--box-shadow);
     text-align: right;
 }
 
-.container {
-    width: 100%;
-    max-width: 800px;
-    margin: 40px auto;
-    background-color: var(--card-background);
-    padding: 40px;
-    border-radius: var(--border-radius);
-    box-shadow: var(--box-shadow);
-    text-align: right;
-}
-
+/* Headings */
 h1 {
     color: var(--primary-color);
-    margin-bottom: 30px;
     font-size: 2rem;
     font-weight: 700;
+    margin-bottom: 20px;
 }
 
 h2 {
     color: var(--primary-color);
-    margin-bottom: 20px;
-    font-size: 1.5rem;
+    font-size: 1.6rem;
     font-weight: 700;
+    margin: 20px 0;
 }
 
 h3 {
-    font-size: 1.3rem;
-    font-weight: 700;
     color: var(--secondary-color);
-    margin-top: 25px;
-    margin-bottom: 15px;
+    font-size: 1.3rem;
+    font-weight: 500;
+    margin: 15px 0;
 }
 
+/* Input Group */
 .input-group {
-    margin-bottom: 25px;
+    margin-bottom: 20px;
     text-align: right;
 }
 
 label {
     display: block;
-    margin-bottom: 8px;
     font-size: 1rem;
-    font-weight: 700;
+    font-weight: 500;
     color: var(--text-color);
+    margin-bottom: 8px;
 }
 
-input[type="number"] {
+input[type="number"],
+select {
     width: 100%;
     padding: 12px;
     border: 1px solid #ccc;
     border-radius: 8px;
-    font-size: 1.1rem;
-    box-sizing: border-box;
+    font-size: 1rem;
+    font-family: var(--font-family);
     text-align: left;
     direction: ltr;
+    transition: var(--transition);
 }
 
-input[type="number"]:focus {
+select {
+    appearance: none;
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24"><path fill="%23333" d="M7 10l5 5 5-5z"/></svg>') no-repeat right 12px center;
+    background-size: 12px;
+    padding-right: 30px;
+}
+
+body.dark-mode select {
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24"><path fill="%23E0E0E0" d="M7 10l5 5 5-5z"/></svg>') no-repeat right 12px center;
+}
+
+input[type="number"]:focus,
+select:focus {
     outline: none;
     border-color: var(--primary-color);
     box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.2);
 }
 
-button {
+/* Button Styles with Loading Animation */
+button,
+.back-button {
+    position: relative;
+    display: inline-block;
     width: 100%;
-    padding: 15px;
-    background-color: var(--primary-color);
-    color: white;
+    padding: 12px;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: var(--card-background);
     border: none;
     border-radius: 8px;
-    font-size: 1.2rem;
-    font-weight: 700;
+    font-size: 1.1rem;
+    font-weight: 500;
     cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease;
+    transition: var(--transition);
+    text-decoration: none;
+    text-align: center;
 }
 
-button:hover {
-    background-color: var(--secondary-color);
+button:hover,
+.back-button:hover,
+button:focus,
+.back-button:focus {
+    background: var(--secondary-color);
     transform: translateY(-2px);
 }
 
-#results {
-    margin-top: 30px;
+button.loading {
+    pointer-events: none;
+    opacity: 0.7;
+}
+
+button.loading::after {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--card-background);
+    border-top: 2px solid transparent;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+@keyframes spin {
+    0% { transform: translate(-50%, -50%) rotate(0deg); }
+    100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+/* Results and Law Items */
+#results,
+.law-item {
+    margin-top: 20px;
     text-align: right;
 }
 
@@ -164,10 +296,11 @@ button:hover {
     padding: 15px;
     margin-bottom: 15px;
     border-radius: 8px;
-    font-size: 1.1rem;
-    line-height: 1.5;
+    font-size: 1rem;
+    line-height: 1.6;
     background-color: var(--background-color);
     border-right: 4px solid var(--primary-color);
+    animation: fadeIn 0.5s ease-in;
 }
 
 #results span {
@@ -175,48 +308,98 @@ button:hover {
     color: var(--primary-color);
 }
 
-.info-container ul {
-    list-style-type: disc;
+.error-message {
+    color: var(--error-color);
+    font-weight: 500;
+    background-color: rgba(211, 47, 47, 0.1);
+    border-right: 4px solid var(--error-color);
+    animation: fadeIn 0.5s ease-in;
+}
+
+/* Fade-in Animation */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Lists */
+.info-container ul,
+.laws-container ul,
+.container ul,
+.container ol {
+    list-style-position: outside;
     padding-right: 20px;
     margin-bottom: 20px;
 }
 
-.info-container li {
+.info-container li,
+.laws-container li,
+.container li {
     margin-bottom: 10px;
     font-size: 1rem;
     line-height: 1.6;
 }
 
-.back-button {
-    display: inline-block;
-    margin-top: 20px;
-    padding: 10px 20px;
-    background-color: var(--primary-color);
-    color: white;
-    text-decoration: none;
-    border-radius: 8px;
-    transition: background-color 0.3s ease;
-}
-
-.back-button:hover {
-    background-color: var(--secondary-color);
-}
-
+/* Footer */
 .footer {
     margin-top: 20px;
     text-align: center;
     font-size: 0.9rem;
     color: #666;
     width: 100%;
+    transition: var(--transition);
 }
 
-p, ul, ol {
-    line-height: 1.8;
-    font-size: 1rem;
-}
-
+/* Responsive Design */
 @media (max-width: 768px) {
     .main-container {
         flex-direction: column;
+        gap: 15px;
+    }
+
+    .calculator-container,
+    .info-container,
+    .laws-container,
+    .container {
+        padding: 20px;
+    }
+
+    h1 {
+        font-size: 1.8rem;
+    }
+
+    h2 {
+        font-size: 1.4rem;
+    }
+
+    button,
+    .back-button,
+    .theme-toggle {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        padding: 10px;
+    }
+
+    .header {
+        padding: 10px 0;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .laws-link,
+    .theme-toggle {
+        font-size: 1rem;
+        width: 100%;
+        text-align: center;
+    }
+
+    input[type="number"],
+    select {
+        font-size: 0.9rem;
+        padding: 10px;
     }
 }

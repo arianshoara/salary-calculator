@@ -8,6 +8,10 @@
 </head>
 <body>
     <div class="container">
+        <div class="header">
+            <a href="index.html" class="back-button">بازگشت به صفحه اصلی</a>
+            <button class="theme-toggle" onclick="toggleTheme()">تم تاریک</button>
+        </div>
         <h1>قوانین کار و حقوق کارگر</h1>
         <h2>باید و نبایدهای محیط کار</h2>
         <h3>بایدهای محیط کار:</h3>
@@ -71,7 +75,7 @@
         </div>
         <div class="law-item">
             <strong>ماده ۳۴:</strong><br>
-            کلیه دریافت‌های قانونی که کارگر به اعتبار قرارداد کار اعم از مزد یا حقوق، کمک عایله‌مندی، هزینه‌های مسکن، خواربار، ایاب و ذهاب، مزایای غیرنقدی، پاداش افزایش تولید، سود سالانه و نظایر آنها دریافت می‌نماید را حق‌السعی می‌نامند.
+            کلیه دریافت‌های قانونی که کارگر به اعتبار قرارداد کار اعم از مزد یا حقوق، کمک عایله‌مندی، هزینه‌های مسکن، خواروبار، ایاب و ذهاب، مزایای غیرنقدی، پاداش افزایش تولید، سود سالانه و نظایر آنها دریافت می‌نماید را حق‌السعی می‌نامند.
         </div>
         <div class="law-item">
             <strong>ماده ۳۵:</strong><br>
@@ -129,7 +133,16 @@
             <strong>ماده ۱۴۸:</strong><br>
             کارفرمایان کارگاه‌های مشمول این قانون مکلف هستند نسبت به بیمه کردن کارگران واحد خود طبق قانون تأمین اجتماعی اقدام کنند.
         </div>
-        <a href="index.html" class="back-button">بازگشت به صفحه اصلی</a>
+        <div class="footer">
+            سایت توسط آرین شعرا ساخته شده است.
+        </div>
     </div>
+    <script>
+        function toggleTheme() {
+            document.body.classList.toggle('dark-mode');
+            const themeToggle = document.querySelector('.theme-toggle');
+            themeToggle.textContent = document.body.classList.contains('dark-mode') ? 'تم روشن' : 'تم تاریک';
+        }
+    </script>
 </body>
 </html>
