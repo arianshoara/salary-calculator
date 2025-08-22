@@ -37,6 +37,8 @@ body.dark-mode .container {
 }
 
 body.dark-mode .laws-link,
+body.dark-mode .back-button,
+body.dark-mode .theme-toggle,
 body.dark-mode #results span,
 body.dark-mode h1,
 body.dark-mode h2 {
@@ -76,7 +78,7 @@ body {
     background-color: var(--background-color);
     color: var(--text-color);
     min-height: 100vh;
-    padding: 20px;
+    padding: 15px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -88,40 +90,31 @@ body {
 .header {
     width: 100%;
     max-width: 1000px;
-    padding: 15px 0;
+    padding: 10px 0;
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
+    gap: 10px;
 }
 
-.laws-link {
+.laws-link,
+.back-button,
+.theme-toggle {
     text-decoration: none;
     font-weight: 500;
     color: var(--primary-color);
-    font-size: 1.1rem;
-    padding: 8px 16px;
+    font-size: 1rem;
+    padding: 10px 20px;
     border-radius: 8px;
     transition: var(--transition);
+    touch-action: manipulation; /* Improve touch interaction */
 }
 
 .laws-link:hover,
-.laws-link:focus {
-    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-    color: var(--card-background);
-}
-
-/* Theme Toggle Button */
-.theme-toggle {
-    background: none;
-    border: none;
-    font-size: 1.1rem;
-    color: var(--primary-color);
-    cursor: pointer;
-    padding: 8px 16px;
-    border-radius: 8px;
-    transition: var(--transition);
-}
-
+.laws-link:focus,
+.back-button:hover,
+.back-button:focus,
 .theme-toggle:hover,
 .theme-toggle:focus {
     background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
@@ -132,7 +125,7 @@ body {
 .main-container {
     display: flex;
     flex-direction: row;
-    gap: 20px;
+    gap: 15px;
     width: 100%;
     max-width: 1000px;
     flex-wrap: wrap;
@@ -144,7 +137,7 @@ body {
 .laws-container,
 .container {
     background-color: var(--card-background);
-    padding: 30px;
+    padding: 20px;
     border-radius: var(--border-radius);
     box-shadow: var(--box-shadow);
     width: 100%;
@@ -154,7 +147,7 @@ body {
 
 .calculator-container {
     flex: 1;
-    min-width: 300px;
+    min-width: 280px;
     text-align: center;
 }
 
@@ -162,53 +155,53 @@ body {
 .laws-container,
 .container {
     flex: 1;
-    min-width: 300px;
+    min-width: 280px;
     text-align: right;
 }
 
 /* Headings */
 h1 {
     color: var(--primary-color);
-    font-size: 2rem;
+    font-size: 1.8rem;
     font-weight: 700;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
 }
 
 h2 {
     color: var(--primary-color);
-    font-size: 1.6rem;
+    font-size: 1.5rem;
     font-weight: 700;
-    margin: 20px 0;
+    margin: 15px 0;
 }
 
 h3 {
     color: var(--secondary-color);
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     font-weight: 500;
-    margin: 15px 0;
+    margin: 10px 0;
 }
 
 /* Input Group */
 .input-group {
-    margin-bottom: 20px;
+    margin-bottom: 15px;
     text-align: right;
 }
 
 label {
     display: block;
-    font-size: 1rem;
+    font-size: 0.95rem;
     font-weight: 500;
     color: var(--text-color);
-    margin-bottom: 8px;
+    margin-bottom: 6px;
 }
 
 input[type="number"],
 select {
     width: 100%;
-    padding: 12px;
+    padding: 10px;
     border: 1px solid #ccc;
     border-radius: 8px;
-    font-size: 1rem;
+    font-size: 0.95rem;
     font-family: var(--font-family);
     text-align: left;
     direction: ltr;
@@ -217,25 +210,26 @@ select {
 
 select {
     appearance: none;
-    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24"><path fill="%23333" d="M7 10l5 5 5-5z"/></svg>') no-repeat right 12px center;
-    background-size: 12px;
-    padding-right: 30px;
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24"><path fill="%23333" d="M7 10l5 5 5-5z"/></svg>') no-repeat right 10px center;
+    background-size: 10px;
+    padding-right: 28px;
 }
 
 body.dark-mode select {
-    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24"><path fill="%23E0E0E0" d="M7 10l5 5 5-5z"/></svg>') no-repeat right 12px center;
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24"><path fill="%23E0E0E0" d="M7 10l5 5 5-5z"/></svg>') no-repeat right 10px center;
 }
 
 input[type="number"]:focus,
 select:focus {
     outline: none;
     border-color: var(--primary-color);
-    box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.2);
+    box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.2);
 }
 
 /* Button Styles with Loading Animation */
 button,
-.back-button {
+.back-button,
+.theme-toggle {
     position: relative;
     display: inline-block;
     width: 100%;
@@ -244,18 +238,22 @@ button,
     color: var(--card-background);
     border: none;
     border-radius: 8px;
-    font-size: 1.1rem;
+    font-size: 1rem;
     font-weight: 500;
     cursor: pointer;
     transition: var(--transition);
     text-decoration: none;
     text-align: center;
+    min-height: 44px; /* Touch-friendly height */
+    touch-action: manipulation;
 }
 
 button:hover,
 .back-button:hover,
+.theme-toggle:hover,
 button:focus,
-.back-button:focus {
+.back-button:focus,
+.theme-toggle:focus {
     background: var(--secondary-color);
     transform: translateY(-2px);
 }
@@ -268,8 +266,8 @@ button.loading {
 button.loading::after {
     content: '';
     position: absolute;
-    width: 20px;
-    height: 20px;
+    width: 18px;
+    height: 18px;
     border: 2px solid var(--card-background);
     border-top: 2px solid transparent;
     border-radius: 50%;
@@ -287,20 +285,20 @@ button.loading::after {
 /* Results and Law Items */
 #results,
 .law-item {
-    margin-top: 20px;
+    margin-top: 15px;
     text-align: right;
 }
 
 #results div,
 .law-item {
-    padding: 15px;
-    margin-bottom: 15px;
+    padding: 12px;
+    margin-bottom: 12px;
     border-radius: 8px;
-    font-size: 1rem;
-    line-height: 1.6;
+    font-size: 0.95rem;
+    line-height: 1.5;
     background-color: var(--background-color);
-    border-right: 4px solid var(--primary-color);
-    animation: fadeIn 0.5s ease-in;
+    border-right: 3px solid var(--primary-color);
+    animation: fadeIn 0.4s ease-in;
 }
 
 #results span {
@@ -312,13 +310,13 @@ button.loading::after {
     color: var(--error-color);
     font-weight: 500;
     background-color: rgba(211, 47, 47, 0.1);
-    border-right: 4px solid var(--error-color);
-    animation: fadeIn 0.5s ease-in;
+    border-right: 3px solid var(--error-color);
+    animation: fadeIn 0.4s ease-in;
 }
 
 /* Fade-in Animation */
 @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
+    from { opacity: 0; transform: translateY(8px); }
     to { opacity: 1; transform: translateY(0); }
 }
 
@@ -328,23 +326,23 @@ button.loading::after {
 .container ul,
 .container ol {
     list-style-position: outside;
-    padding-right: 20px;
-    margin-bottom: 20px;
+    padding-right: 15px;
+    margin-bottom: 15px;
 }
 
 .info-container li,
 .laws-container li,
 .container li {
-    margin-bottom: 10px;
-    font-size: 1rem;
-    line-height: 1.6;
+    margin-bottom: 8px;
+    font-size: 0.95rem;
+    line-height: 1.5;
 }
 
 /* Footer */
 .footer {
-    margin-top: 20px;
+    margin-top: 15px;
     text-align: center;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     color: #666;
     width: 100%;
     transition: var(--transition);
@@ -354,28 +352,34 @@ button.loading::after {
 @media (max-width: 768px) {
     .main-container {
         flex-direction: column;
-        gap: 15px;
+        gap: 12px;
     }
 
     .calculator-container,
     .info-container,
     .laws-container,
     .container {
-        padding: 20px;
+        padding: 15px;
+        min-width: 100%;
     }
 
     h1 {
-        font-size: 1.8rem;
+        font-size: 1.6rem;
     }
 
     h2 {
-        font-size: 1.4rem;
+        font-size: 1.3rem;
+    }
+
+    h3 {
+        font-size: 1.1rem;
     }
 
     button,
     .back-button,
     .theme-toggle {
-        font-size: 1rem;
+        font-size: 0.95rem;
+        padding: 10px;
     }
 }
 
@@ -385,21 +389,79 @@ button.loading::after {
     }
 
     .header {
-        padding: 10px 0;
         flex-direction: column;
-        gap: 10px;
+        align-items: stretch;
+        gap: 8px;
     }
 
     .laws-link,
+    .back-button,
     .theme-toggle {
-        font-size: 1rem;
-        width: 100%;
-        text-align: center;
+        font-size: 0.9rem;
+        padding: 10px;
+        min-height: 40px;
     }
 
     input[type="number"],
     select {
         font-size: 0.9rem;
+        padding: 8px;
+    }
+
+    .calculator-container,
+    .info-container,
+    .laws-container,
+    .container {
+        padding: 12px;
+    }
+
+    #results div,
+    .law-item {
         padding: 10px;
+        font-size: 0.9rem;
+    }
+
+    .footer {
+        font-size: 0.8rem;
+    }
+}
+
+@media (max-width: 360px) {
+    h1 {
+        font-size: 1.4rem;
+    }
+
+    h2 {
+        font-size: 1.2rem;
+    }
+
+    h3 {
+        font-size: 1rem;
+    }
+
+    input[type="number"],
+    select {
+        font-size: 0.85rem;
+        padding: 7px;
+    }
+
+    button,
+    .back-button,
+    .theme-toggle {
+        font-size: 0.85rem;
+        padding: 8px;
+        min-height: 38px;
+    }
+
+    #results div,
+    .law-item {
+        font-size: 0.85rem;
+        padding: 8px;
+    }
+
+    .info-container li,
+    .laws-container li,
+    .container li {
+        font-size: 0.85rem;
     }
 }
